@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace QuanLyHocSinh
+{
+    public class HocSinh
+    {
+        public int MaSo { get; set; }
+        public string Ten { get; set; }
+        public int Tuoi { get; set; }
+    }
+   class Program
+    {
+        static void Main(string[] args)
+        {
+            List<HocSinh> danhSachHocSinh = new List<HocSinh>
+            {
+                new HocSinh { MaSo = 1, Ten = "An", Tuoi = 16 },
+                new HocSinh { MaSo = 2, Ten = "Binh", Tuoi = 17 },
+                new HocSinh { MaSo = 3, Ten = "Cuong", Tuoi = 15 },
+                new HocSinh { MaSo = 4, Ten = "Dung", Tuoi = 19 },
+                new HocSinh { MaSo = 5, Ten = "Anh", Tuoi = 18 }
+            };
+
+            //a in danh sách toàn bộ học sinh
+            Console.WriteLine("Danh sach toan bo hoc sinh:");
+            foreach (var hocSinh in danhSachHocSinh)
+            {
+                Console.WriteLine($"Ma so: {hocSinh.MaSo}, Ten: {hocSinh.Ten}, Tuoi: {hocSinh.Tuoi}");
+            }
+
+            //b tìm và in ra danh sách các học sinh có tuổi từ 15 đến 18
+            var hocSinhTheoTuoi = danhSachHocSinh.Where(hs => hs.Tuoi >= 15 && hs.Tuoi <= 18);
+            Console.WriteLine("\ndanh sach hoc sinh co tuoi tu 15 den 18 tuoi: ");
+            foreach (var hocSinh in hocSinhTheoTuoi)
+            {
+                Console.WriteLine($"Ma so: {hocSinh.MaSo}, Ten: {hocSinh.Ten}, Tuoi: {hocSinh.Tuoi}");
+            }
+
+            //c tìm và in ra học sinh có tên bắt đầu bằng chữ "A"
+            var hocSinhTenA = danhSachHocSinh.Where(hs => hs.Ten.StartsWith("A"));
+            Console.WriteLine("\nHoc sinh co ten bat dau bang chu 'A':");
+            foreach (var hocSinh in hocSinhTenA)
+            {
+                Console.WriteLine($"Ma So: {hocSinh.MaSo}, Ten: {hocSinh.Ten}, Tuoi: {hocSinh.Tuoi}");
+            }
+
+            //d tính tổng tuổi của tất cả học sinh
+            var tongTuoi = danhSachHocSinh.Sum(hs => hs.Tuoi);
+            Console.WriteLine($"\nTong tuoi cua tat ca hoc sinh: {tongTuoi}");
+
+            //e tìm và in ra học sinh có tuổi lớn nhất
+            var hocSinhLonNhat = danhSachHocSinh.OrderByDescending(hs => hs.Tuoi).FirstOrDefault();
+            Console.WriteLine($"\nHoc sinh co tuoi lon nhat: Ma so: {hocSinhLonNhat.MaSo}, Ten: {hocSinhLonNhat.Ten}, Tuoi: {hocSinhLonNhat.Tuoi}");
+
+            //f sắp xếp danh sách học sinh theo tuổi tăng dần và in ra danh sách sau khi sắp xếp
+            var danhSachHocSinhSapXep = danhSachHocSinh.OrderBy(hs => hs.Tuoi);
+            Console.WriteLine("\ndanh sach hoc sinh sap xep theo tuoi tang dan:");
+            foreach (var hocSinh in danhSachHocSinhSapXep)
+            {
+                Console.WriteLine($"Ma so: {hocSinh.MaSo}, Ten: {hocSinh.Ten}, Tuoi: {hocSinh.Tuoi}");
+            }
+        }
+    }
+}
