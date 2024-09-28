@@ -1,0 +1,45 @@
+using System;
+using System.Windows.Forms;
+
+namespace baitap4
+{
+    public partial class NhanVien : Form
+    {
+        public NhanVienData NhanVienData { get; private set; }
+
+        public NhanVien()
+        {
+            InitializeComponent();
+        }
+
+        // Hàm khởi tạo cho sửa nhân viên
+        public NhanVien(NhanVienData nv) : this()
+        {
+            txtMSNV.Text = nv.MSNV;  // Gán mã số NV vào TextBox
+            txtTen.Text = nv.Ten;    // Gán tên NV vào TextBox
+            txtLuong.Text = nv.Luong.ToString();  // Gán lương vào TextBox
+        }
+
+        private void btnDongY_Click_1(object sender, EventArgs e)
+        {
+            // Kiểm tra và lưu dữ liệu nhập từ các TextBox
+            NhanVienData = new NhanVienData
+            {
+                MSNV = txtMSNV.Text,
+                Ten = txtTen.Text,
+                Luong = decimal.Parse(txtLuong.Text)
+            };
+
+            this.DialogResult = DialogResult.OK;  // Đặt kết quả trả về là OK
+            this.Close();  // Đóng form
+        }
+
+        private void btnBoQua_Click_1(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;  // Kết quả Cancel
+            this.Close();  // Đóng form
+        }
+
+
+    }
+}
